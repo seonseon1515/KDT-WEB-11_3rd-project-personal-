@@ -7,20 +7,33 @@ import { configureStore } from '@reduxjs/toolkit';
 import persistStore from 'redux-persist/lib/persistStore';
 
 
+// const rootReducer = combineReducers({
+// nativeFilter:NativeFilterReducer,
+// posts: PostSlice,
+// });
+
+// const persistConfig = {
+//   key:'root',
+//   storage,
+//   whiteList: ["PostSlice"],
+// }
+
 const rootReducer = combineReducers({
-nativeFilter:NativeFilterReducer,
-posts: PostSlice,
+  nativeFilter: NativeFilterReducer,
+  posts: persistReducer(
+    {
+      key: 'root',
+      storage,
+      whitelist: ['PostSlice'], // 지속할 슬라이스 목록 설정
+    },
+    PostSlice
+  ),
 });
 
-const persistConfig = {
-  key:'root',
-  storage,
-  whiteList: ["PostSlice"],
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+export default rootReducer;
+// const persistedReducer = persistReducer(persistConfig, PostSlice);
 
 
-
-export default persistedReducer ;
-// export const persistor = persistStore(store);
+// export default persistedReducer ;
+// export const persistor = persistStore(store); 
+// 

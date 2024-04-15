@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import TextEditor from '../TextEditor';
 import { useState } from 'react';
 import '../../css/common_css/Variables.scss';
@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { NewPost } from '../../commonInterface';
 import { addPostFunc } from '../../store/PostSlice';
 import { Link } from 'react-router-dom';
+import moment from 'moment'
 
 export default function WriteComponent() {
   const [data, setData] = useState("");
@@ -18,8 +19,30 @@ export default function WriteComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const posts = useSelector((state: {posts: {postList: NewPost[]}})=>state.posts.postList);
+  const [agoTime, setAgoTime] = useState<number>(3);
+  
 
 
+  // 글 작성 몇시, 몇분 전 표시할 함수
+ 
+  // const PostMinutes:number = new Date().getMinutes();
+  // const PostHours:number = new Date().getHours();
+
+ 
+
+  // useEffect(()=>{
+  //   console.log('agoTime: ', agoTime)
+    
+  //   const intervalId = setInterval(() => {
+  //     setAgoTime(new Date().getMinutes() - PostMinutes)
+  //   }, 60000);
+  //   // 컴포넌트가 언마운트될 때 타이머 정리
+  //   return () => clearInterval(intervalId);
+  // },[PostMinutes])
+ 
+
+
+  // new Date().toLocaleString()
   const addPost = useCallback(()=>{
     console.log('someFunciton 실행!')
     console.log(`input: ${inputTitle}`)
@@ -29,7 +52,7 @@ export default function WriteComponent() {
           id:posts.length+1,
           author: '작성자', 
           title:inputTitle,
-          timeStamp: new Date().toLocaleString(), // 그냥 작동되는지?
+          timeStamp:new Date().toLocaleString(), // 그냥 작동되는지?
           content: data.replace(/<(?:.|\n)*?>/gm, '')
         };
         dispatch(addPostFunc(newPost));

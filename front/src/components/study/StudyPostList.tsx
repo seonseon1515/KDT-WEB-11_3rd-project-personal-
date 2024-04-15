@@ -67,18 +67,18 @@ export default function StudyPostList() {
   return (
     <div className='componentLayout'>
       {/* 게시판 작성 페이지 */}
-      <Link to='/study/write'>게시글 작성</Link>
+      <Link to='/study/write'><button className='writeBtn'>작성</button></Link>
       <div className='boardWrap'>
         {posts.map((post: NewPost, index) => (
           <div className='boardComponent' key={index}>
             <div className='componentTopWrap'>
               <div style={bgColor} className="post studyProfileImg">{post.author.charAt(0)}</div>
-              <div className='post studyWriter'>{post.author}</div>
+              <div className='post studyWriter'>{post.author} </div>
               <div className='post studyTime'>{post.timeStamp}</div>
             </div>
-            <div className='post studyTitle'>제목: {post.title}</div>
-            <div className='post studyContents'>내용: {post.content}</div>
-            <button onClick={()=>deletePost(post)} className="cancelBtn">삭제</button>
+              <div className='overText studyTitle'>[{post.title}]</div>
+              <div className='overText studyContents'>{post.content}</div>
+              <button onClick={()=>deletePost(post)} className="cancelBtn">삭제</button>
           </div>
         ))}
       </div>

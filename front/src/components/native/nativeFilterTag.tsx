@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { nativeFilterData4 } from '../../data/native_filter_data'
+import { nativeFilterData3 } from '../../data/native_filter_data'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { UseDispatch } from 'react-redux';
@@ -8,15 +8,9 @@ import rootReducer from '../../store';
 import NativeFilterReducer from '../../store/NativeFilterReducer';
 import { Discuss,Business, Opic,Toeic,News,Interview,Junior } from '../../store/NativeFilterReducer';
 import MakeNativeArr from './MakeNativeArr';
+import { nativeFilterData } from '../../data/native_filter_data';
 
-interface FilterNative {
-  full_name:string;
-  id:number;
-  gender:string;
-  level:string;
-  course:string;
-}
-console.log(nativeFilterData4)
+console.log(nativeFilterData3)
 
 interface rootState {
     btnDiscussSelect:boolean,
@@ -90,7 +84,7 @@ useEffect(() => {
   }
   console.log('courseValueStr: ',courseValueStr);
          console.log('courseValueSet', courseValueSet);
-}, [btnDiscussSelect, btnDisscussValue ]);
+}, [btnDiscussSelect, btnDisscussValue]);
 // 비지니스 코스
 useEffect(() => {
   if (btnBusinessSelect) {
@@ -174,7 +168,7 @@ useEffect(() => {
     console.log('btnLevelValue: ', btnLevelValue);
   }, [btnLevelValue]);
 
-  const levelFilter = nativeFilterData4.filter((clickLevel)=>{
+  const levelFilter = nativeFilterData3.filter((clickLevel)=>{
     return (clickLevel.level.includes(btnLevelValue))
  })
   // const btnCourseValueFunc = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -229,7 +223,7 @@ const dispatch = useDispatch();
         <button value="면접대비" onClick={(e:React.MouseEvent<HTMLButtonElement>)=>dispatch(Interview())}>면접대비</button>
         <button value="주니어 영어" onClick={(e:React.MouseEvent<HTMLButtonElement>)=>dispatch(Junior())}>주니어영어</button>
       </div>
-      {
+      {/* {
         levelFilter.map((obj, idx)=>{
           return(
             <ul>
@@ -237,8 +231,8 @@ const dispatch = useDispatch();
             </ul>
           )
         })
-      }
-      <MakeNativeArr courseValueStr={courseValueStr}/>
+      } */}
+      <MakeNativeArr courseValueStr={courseValueStr} btnLevelValue={btnLevelValue}/>
     </div>
   )
     }
