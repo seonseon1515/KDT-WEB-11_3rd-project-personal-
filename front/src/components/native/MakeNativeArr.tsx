@@ -1,6 +1,7 @@
 import { courseValueSet } from "./NativeFilterTag";
 import { nativeFilterData3 } from "../../data/native_filter_data";
 import { useEffect, useState } from "react";
+import AllTutor from "./AllTutor";
 
 
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function MakeNativeArr ({courseValueStr, btnLevelValue}:Props) {  
+  const [searchResult, setSearchResult] = useState<boolean>(false)
   // const [courseFilter, setCourseFilter] = useState<NativeFilterData4[]>([])
      // 중복 값 해결
   
@@ -33,6 +35,7 @@ export default function MakeNativeArr ({courseValueStr, btnLevelValue}:Props) {
   //   }
   //   return false; // 모든 요소를 검사했는데도 조건을 만족하는 요소가 없는 경우 false 반환
   // });
+
   
   const courseFilter = nativeFilterData3.filter((pushedValue) => {
        return pushedValue.course.includes(courseValueStr.join(','))});
@@ -73,6 +76,7 @@ export default function MakeNativeArr ({courseValueStr, btnLevelValue}:Props) {
 // => 상태 관리가 필요할 듯
     return(
       <div className="boardProfileWrap">
+       
         {
           courseLevelFilter.map((value,idx)=>{
             return(

@@ -53,7 +53,7 @@ export default function WriteComponent() {
           author: '작성자', 
           title:inputTitle,
           timeStamp:new Date().toLocaleString(), // 그냥 작동되는지?
-          content: data.replace(/<(?:.|\n)*?>/gm, '')
+          content: data.replace(/<(?:.|\n)*?>/gm, '').replace(/&nbsp;/g, ' ')
         };
         dispatch(addPostFunc(newPost));
         navigate('/study');

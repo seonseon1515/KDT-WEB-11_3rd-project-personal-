@@ -2,8 +2,16 @@ import { tutor_data } from '../../data/tutor_data'
 import SearchBar from './SearchBar'
 import React, { useState } from 'react'
 import SearchTutor from './SearchTutor'
+import { nativeFilterData3 } from '../../data/native_filter_data'
 
-export default function AllTutor() {
+interface Props {
+  courseValueStr:string[];
+  btnLevelValue:string;
+  // 필터 값
+}
+
+
+export default function AllTutor({courseValueStr, btnLevelValue}:Props) {
   const [search,setSearch] = useState<string>('')
   const inputTutor = (value: any) => {
     setSearch(value);
@@ -21,12 +29,28 @@ export default function AllTutor() {
     }
   }
   
+  const courseFilter = nativeFilterData3.filter((pushedValue) => {
+    return pushedValue.course.includes(courseValueStr.join(','))});
+
+   const courseLevelFilter = courseFilter.filter((pushedValue)=>{
+     return pushedValue.level.includes(btnLevelValue)
+   })
+
+   const courseLevelFilter2 = courseFilter.filter((pushedValue)=>{
+    return pushedValue.full_name.includes(btnLevelValue)
+  })
+
+  const lastFilter = courseFilter.filter((pushedValue)=>{
+    return pushedValue.email.includes(btnLevelValue)
+  })
+  
+
   return (
     <div>
       <SearchBar search={search} inputTutor={inputTutor} handleSearch={handleSearch} handleEnter={handleEnter}></SearchBar>
        
       {searchResult || <div className='tutor_list'>
-        { tutor_data.map((tutor,idx)=>{
+        { nativeFilterData3.map((tutor,idx)=>{
           return(
             <ul key={idx}>
               <li>{tutor.full_name}</li>
@@ -36,7 +60,7 @@ export default function AllTutor() {
         })}
         </div>}
         
-        {searchResult && <SearchTutor search={search} />}
+        {searchResult && <SearchTutor search={search} lastFilter={lastFilter} />}
     </div>
   )
       }      

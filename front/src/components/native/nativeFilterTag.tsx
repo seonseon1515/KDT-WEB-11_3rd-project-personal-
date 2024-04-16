@@ -9,6 +9,7 @@ import NativeFilterReducer from '../../store/NativeFilterReducer';
 import { Discuss,Business, Opic,Toeic,News,Interview,Junior } from '../../store/NativeFilterReducer';
 import MakeNativeArr from './MakeNativeArr';
 import { nativeFilterData } from '../../data/native_filter_data';
+import AllTutor from './AllTutor';
 
 console.log(nativeFilterData3)
 
@@ -232,7 +233,7 @@ const dispatch = useDispatch();
           )
         })
       } */}
-      <MakeNativeArr courseValueStr={courseValueStr} btnLevelValue={btnLevelValue}/>
+      <MakeNativeArr courseValueStr={courseValueStr} btnLevelValue={btnLevelValue} />
     </div>
   )
     }
