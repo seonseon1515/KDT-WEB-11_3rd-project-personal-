@@ -13,6 +13,7 @@ import { deletePostFunc } from '../../store/PostSlice';
 
 
 
+
 interface BgColor {
   backgroundColor:string
 }
@@ -26,6 +27,8 @@ export default function StudyPostList() {
 
   const handleCounter = () => {
     setClickCount(prevNember=> prevNember += 1)
+
+    navigate('/study/post/:studyPostId');
   }
 
   const deletePost = (postId:NewPost) => {
@@ -72,7 +75,7 @@ export default function StudyPostList() {
     <div className='componentLayout'>
       {/* 게시판 작성 페이지 */}
       <Link to='/study/write'><button className='writeBtn'>게시글 작성하기</button></Link>
-      <div className='boardWrap' onClick={handleCounter}>
+      <Link to='/study/post/:studyPostId'><div className='boardWrap' onClick={handleCounter}>
         {posts.map((post: NewPost, index) => (
           <div className='boardComponent' key={index}>
             <div className='componentTopWrap'>
@@ -86,7 +89,7 @@ export default function StudyPostList() {
               <button onClick={()=>deletePost(post)} className="cancelBtn">삭제</button>
           </div>
         ))}
-      </div>
+      </div></Link>
     </div>
   )
 }

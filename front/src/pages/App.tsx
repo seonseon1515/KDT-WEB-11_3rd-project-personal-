@@ -26,6 +26,7 @@ import { Discuss } from '../store/NativeFilterReducer';
 import Business from './introduce_page/Intro_Business';
 import WriteComponent from '../components/common/WriteComponent';
 import StudyPostList from '../components/study/StudyPostList';
+import StudyPostDetail from '../components/study/StudyPostDetail';
 
 
 
@@ -55,6 +56,7 @@ function App() {
 
               <Route path='/study/write' element={<WriteComponent />} />
               <Route path='/study/board' element={<StudyPostList />} />
+              <Route path='study/post/:studyPostId' element={<StudyPostDetail />}/>
             </Routes>
           </BrowserRouter> 
         </div>
