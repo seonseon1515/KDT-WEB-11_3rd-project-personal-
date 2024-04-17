@@ -22,7 +22,11 @@ export default function StudyPostList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const posts = useSelector((state: {posts: {postList: NewPost[]}})=>state.posts.postList);
-  
+  const [clickCount, setClickCount] = useState<number>(0)
+
+  const handleCounter = () => {
+    setClickCount(prevNember=> prevNember += 1)
+  }
 
   const deletePost = (postId:NewPost) => {
     dispatch(deletePostFunc(postId))
@@ -67,14 +71,15 @@ export default function StudyPostList() {
   return (
     <div className='componentLayout'>
       {/* 게시판 작성 페이지 */}
-      <Link to='/study/write'><button className='writeBtn'>작성</button></Link>
-      <div className='boardWrap'>
+      <Link to='/study/write'><button className='writeBtn'>게시글 작성하기</button></Link>
+      <div className='boardWrap' onClick={handleCounter}>
         {posts.map((post: NewPost, index) => (
           <div className='boardComponent' key={index}>
             <div className='componentTopWrap'>
               <div style={bgColor} className="post studyProfileImg">{post.author.charAt(0)}</div>
               <div className='post studyWriter'>{post.author} </div>
               <div className='post studyTime'>{post.timeStamp}</div>
+              <div className="post studyClickCount">조회수{clickCount}</div>
             </div>
               <div className='overText studyTitle'>[{post.title}]</div>
               <div className='overText studyContents'>{post.content}</div>

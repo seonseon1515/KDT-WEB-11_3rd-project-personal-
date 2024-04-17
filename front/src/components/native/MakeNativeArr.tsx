@@ -111,3 +111,4 @@ export default function MakeNativeArr ({courseValueStr, btnLevelValue}:Props) {
 //   console.log('clickedOutCourseFilter: ', clickedOutCourseFilter)
 //   }
 
+// 태그 필터랑 검색 필터 결과 합치기??????
